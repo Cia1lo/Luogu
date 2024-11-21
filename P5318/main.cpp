@@ -42,9 +42,22 @@ void CreatAlgraph(ALGraph* G)
     
 }
 
+void DFS(ALGraph* G, int start, bool visited[])
+{
+    ArcNode* p;
+    visited[start] = true;
+    cout<<start<<" ";
+    p = G->vertices[start].firstNode;
+    while (p)
+    {
+        
+    }
+    
+}
+
 int main()
 {
-    
+    bool visited[MaxVexNum] = {false};
 
     cout<<endl;
     system("pause");
