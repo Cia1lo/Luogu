@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 #define MaxVexNum 100000
 using namespace std;
 
@@ -50,9 +51,35 @@ void DFS(ALGraph* G, int start, bool visited[])
     p = G->vertices[start].firstNode;
     while (p)
     {
-        
+        if (!visited[p->adjvex])
+        {
+            DFS(G, p->adjvex, visited);
+        }
+        p = p->next;
     }
-    
+}
+
+void BFS(ALGraph* G, int start, bool visited[])
+{
+    queue<int> q;
+    visited[start] = true;    
+    q.push(start);
+    while (!q.empty())
+    {
+        int v = q.front();
+        q.pop();
+        cout << v << " ";
+        ArcNode* p = G->vertices[v].firstNode;
+        while (p)
+        {
+            if (!visited[p->adjvex])
+            {
+                visited[p->adjvex] = true;
+                q.push(p->adjvex);
+            }
+            p = p->next;
+        }
+    }
 }
 
 int main()
