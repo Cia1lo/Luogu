@@ -19,6 +19,28 @@ typedef struct
     int   vernum, arcnum;
 }ALGraph;
 
+void CreatAlgraph(ALGraph* G)
+{
+    ArcNode* p;
+
+    scanf("%d %d", &G->vernum, &G->arcnum);
+    
+    for (size_t i = 0; i < G->vernum; i++)
+    {
+        G->vertices[i].firstNode = NULL;
+    }
+
+    for (size_t i = 0; i < G->arcnum; i++)
+    {
+        int m, n;
+        scanf("%d %d", &m, &n);
+        p = (ArcNode*)malloc(sizeof(ArcNode));
+        p->adjvex = n;
+        p->next = G->vertices[m].firstNode;
+        G->vertices[m].firstNode = p;
+    }
+    
+}
 
 int main()
 {
