@@ -20,11 +20,33 @@ typedef struct
     int   vernum, arcnum;
 }ALGraph;
 
+void AddEdge(ALGraph* G, int i, int j)
+{
+    ArcNode* newArc = (ArcNode*)malloc(sizeof(ArcNode));
+    newArc->adjvex = j;
+    if (G->vertices[i].firstNode == NULL || G->vertices[i].firstNode->adjvex > j)
+    {
+        newArc->next = G->vertices[i].firstNode;
+        G->vertices[i].firstNode = newArc;
+        return;
+    }
+    else
+    {
+        ArcNode* p = G->vertices[i].firstNode;
+        while (p->next && p->next->adjvex < j)
+        {
+            p = p->next;
+        }
+        newArc->next = p->next;
+        p->next = newArc;
+    }
+}
 
+//头插法创建邻接表
 void CreatAlgraph(ALGraph* G)
 {
     ArcNode* p;
-
+    int m, n;
     scanf("%d %d", &G->vernum, &G->arcnum);
     
     for (size_t i = 0; i < G->vernum; i++)
@@ -34,13 +56,10 @@ void CreatAlgraph(ALGraph* G)
 
     for (size_t i = 0; i < G->arcnum; i++)
     {
-        int m, n;
         scanf("%d %d", &m, &n);
-        p = (ArcNode*)malloc(sizeof(ArcNode));
-        p->adjvex = n;
-        p->next = G->vertices[m].firstNode;
-        G->vertices[m].firstNode = p;
+        AddEdge(G, m, n);
     }
+    
     
 }
 /*
@@ -104,6 +123,6 @@ int main()
     DFS(&G, 1, visited1);
     cout << endl;
     bool visited2[MaxVexNum + 1] = {false};
-    DFS(&G, 1, visited2);
+    BFS(&G, 1, visited2);
     return 0;
 }
