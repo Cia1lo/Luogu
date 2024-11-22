@@ -72,7 +72,6 @@ BFS实现:
 标记起始节点为已访问
 队列不为空时，出队一个节点，输出节点
 将该节点的所有邻接节点入队
- 
 */
 void BFS(ALGraph* G, int start, bool visited[])
 {
