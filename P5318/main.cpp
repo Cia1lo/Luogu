@@ -20,6 +20,7 @@ typedef struct
     int   vernum, arcnum;
 }ALGraph;
 
+
 void CreatAlgraph(ALGraph* G)
 {
     ArcNode* p;
@@ -42,7 +43,13 @@ void CreatAlgraph(ALGraph* G)
     }
     
 }
-
+/*
+DFS实现:
+层层递进，递归实现
+将访问过的节点标记为已访问
+输出节点
+递进到下一个节点
+*/
 void DFS(ALGraph* G, int start, bool visited[])
 {
     ArcNode* p;
@@ -84,9 +91,12 @@ void BFS(ALGraph* G, int start, bool visited[])
 
 int main()
 {
-    bool visited[MaxVexNum] = {false};
-
-    cout<<endl;
-    system("pause");
+    bool visited1[MaxVexNum + 1] = {false};
+    ALGraph G;
+    CreatAlgraph(&G);
+    DFS(&G, 1, visited1);
+    cout << endl;
+    bool visited2[MaxVexNum + 1] = {false};
+    DFS(&G, 1, visited2);
     return 0;
 }
