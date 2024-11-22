@@ -65,7 +65,15 @@ void DFS(ALGraph* G, int start, bool visited[])
         p = p->next;
     }
 }
-
+/*
+BFS实现:
+使用队列实现
+创建队列，将起始节点入队
+标记起始节点为已访问
+队列不为空时，出队一个节点，输出节点
+将该节点的所有邻接节点入队
+ 
+*/
 void BFS(ALGraph* G, int start, bool visited[])
 {
     queue<int> q;
